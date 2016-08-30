@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <OutputPath>..\output</OutputPath>
+    <DefineConstants />
+    <ProjectGuid>{CB51155B-9B88-498F-806E-641E6D1BE852}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Core" />
+    <Reference Include="System" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Reflection.Metadata.dll">
+      <HintPath>..\Packages\System.Reflection.Metadata.1.1.0/lib/portable-net45+win8/System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable.dll">
+      <HintPath>..\Packages\System.Collections.Immutable.1.1.37/lib/dotnet/System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.dll">
+      <HintPath>..\Packages\Microsoft.CodeAnalysis.Common.1.1.1/lib/portable-net45+win8/Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp.dll">
+      <HintPath>..\Packages\Microsoft.CodeAnalysis.CSharp.1.1.1/lib/portable-net45+win8/Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\BasicLogMessage.cs" />
+    <Compile Include="Common\ClassTrace.cs" />
+    <Compile Include="Common\ConsoleLogFollower.cs" />
+    <Compile Include="Common\DebugLogFollower.cs" />
+    <Compile Include="Common\HexDump.cs" />
+    <Compile Include="Common\ILogFollower.cs" />
+    <Compile Include="Common\ILogMessage.cs" />
+    <Compile Include="Common\ILogMessageFactory.cs" />
+    <Compile Include="Common\Log.cs" />
+    <Compile Include="Common\LogContentConverter.cs" />
+    <Compile Include="Common\LogContext.cs" />
+    <Compile Include="Common\LogMessageContent.cs" />
+    <Compile Include="Common\LogMessageExtensions.cs" />
+    <Compile Include="Common\LogMessageSubmitOptions.cs" />
+    <Compile Include="Common\LogPrinterFormat.cs" />
+    <Compile Include="Common\LogSeverity.cs" />
+    <Compile Include="Common\LogSourceAttribute.cs" />
+    <Compile Include="Common/Tokenization\TokenWriter.cs" />
+    <Compile Include="Common/Tokenization\TokenWriterExtensions.cs" />
+    <Compile Include="Common\ProcessRunner.cs" />
+    <Compile Include="Common\AssemblyExtensions.cs" />
+    <Compile Include="Common\Base32Encoding.cs" />
+    <Compile Include="Common\ByteArrayExtensions.cs" />
+    <Compile Include="Common\ConsoleWriter.cs" />
+    <Compile Include="Common\GeneratorIgnoreAttribute.cs" />
+    <Compile Include="Common\PartialTypeResolver.cs" />
+    <Compile Include="Common\PathBuilder.cs" />
+    <Compile Include="Common\PathElements.cs" />
+    <Compile Include="Common\StringExtensions.cs" />
+    <Compile Include="Common\TypeResolverException.cs" />
+    <Compile Include="Common\UniqueTimeSource.cs" />
+    <Compile Include="Common\WildcardFactory.cs" />
+    <Compile Include="Common\Tree.cs" />
+    <Compile Include="Common\TreeResult.cs" />
+    <Compile Include="CSharpSuction\INameInfo.cs" />
+    <Compile Include="CSharpSuction\ISourceInfo.cs" />
+    <Compile Include="CSharpSuction\ITypeInfo.cs" />
+    <Compile Include="CSharpSuction\SourceState.cs" />
+    <Compile Include="CSharpSuction/Exceptions\SuctionConfigurationException.cs" />
+    <Compile Include="CSharpSuction/Configuration\EmitInstruction.cs" />
+    <Compile Include="CSharpSuction/Configuration\SourceInclude.cs" />
+    <EmbeddedResource Include="Tools\Suction\Configuration\SuctionConfiguration.xsd" />
+    <Compile Include="CSharpSuction\SuctionProject.cs" />
+    <Compile Include="CSharpSuction\Checksum.cs" />
+    <Compile Include="CSharpSuction\DependencyOrdering.cs" />
+    <Compile Include="CSharpSuction\Extensions.cs" />
+    <Compile Include="CSharpSuction\IToolmap.cs" />
+    <Compile Include="CSharpSuction\ITypeInfoExtensions.cs" />
+    <Compile Include="CSharpSuction\Program.cs" />
+    <Compile Include="CSharpSuction\ProjectApplicator.cs" />
+    <Compile Include="CSharpSuction\Suction.cs" />
+    <EmbeddedResource Include="Tools\Suction\Core\SuctionDocumentation.xsd" />
+    <Compile Include="CSharpSuction\SuctionEvent.cs" />
+    <Compile Include="CSharpSuction\SummaryPrinter.cs" />
+    <Compile Include="CSharpSuction\TreeCollection.cs" />
+    <Compile Include="CSharpSuction\TypeInfo.cs" />
+    <Compile Include="CSharpSuction\UsingImplicator.cs" />
+    <Compile Include="CSharpSuction\FactoryChoice.cs" />
+    <Compile Include="CSharpSuction\FactorySelection.cs" />
+    <Compile Include="CSharpSuction\Emit.cs" />
+    <Compile Include="CSharpSuction/Generation\EmitAssembly.cs" />
+    <Compile Include="CSharpSuction/Documentation\EmitDocumentation.cs" />
+    <Compile Include="CSharpSuction/Documentation\HtmlDocumentationBuilder.cs" />
+    <Compile Include="CSharpSuction/Documentation\HtmlDocumentationCallback.cs" />
+    <Compile Include="CSharpSuction/Documentation\HtmlDocumentationGenerator.cs" />
+    <EmbeddedResource Include="Tools\Suction\Core\Generation\Documentation\IntermediateToHtml.xslt" />
+    <Compile Include="CSharpSuction/Documentation\Topic.cs" />
+    <Compile Include="CSharpSuction/Documentation\TopicLink.cs" />
+    <Compile Include="CSharpSuction/Documentation\TopicRelation.cs" />
+    <Compile Include="CSharpSuction/Generation\EmitProject.cs" />
+    <Compile Include="CSharpSuction/Generation\EmitProjectCopy.cs" />
+    <Compile Include="CSharpSuction/Generation\EmitProjectOnOriginalSource.cs" />
+    <Compile Include="CSharpSuction/Input\AssemblyReferenceInfo.cs" />
+    <Compile Include="CSharpSuction/Input\CompilationSourceInfo.cs" />
+    <Compile Include="CSharpSuction/Input\ConvertedInputInfo.cs" />
+    <Compile Include="CSharpSuction/Input\EmbeddedResourceSourceInfo.cs" />
+    <Compile Include="CSharpSuction/Input\NameInfo.cs" />
+    <Compile Include="CSharpSuction/Input\NameMap.cs" />
+    <Compile Include="CSharpSuction/Input\NameRole.cs" />
+    <Compile Include="CSharpSuction/Input\NuGetReferenceInfo.cs" />
+    <Compile Include="CSharpSuction/Input\SourceInfo.cs" />
+    <Compile Include="CSharpSuction/Resolution\Resolver.cs" />
+    <Compile Include="CSharpSuction/Resolution\ResolverMethodMap.cs" />
+    <Compile Include="CSharpSuction/Results\ResultWriter.cs" />
+    <Compile Include="CSharpSuction/Results\UnhandledSyntaxDocumentationWarning.cs" />
+    <Compile Include="CSharpSuction/Results\UnprocessedFileWarning.cs" />
+    <Compile Include="CSharpSuction/Results\UnresolvedDocumentationReferenceResult.cs" />
+    <Compile Include="CSharpSuction/Results\UnresolvedReferenceResult.cs" />
+    <Compile Include="CSharpSuction/Results\WarningResult.cs" />
+    <EmbeddedResource Include="Tools\Suction\Core\Toolmap\Toolmap.xml" />
+    <Compile Include="CSharpSuction/Toolmap\ToolmapReader.cs" />
+    <EmbeddedResource Include="Tools\Suction\JScript\Scripts\RuntimeTypeMap.xml" />
+    <Compile Include="CSharpSuction/Generation\EmitTypeScript.cs" />
+    <Compile Include="CSharpSuction/Generation\ScriptStateModifier.cs" />
+    <Compile Include="CSharpSuction/Generation\StateSection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.suction.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SuctionDocumentation"
+    targetNamespace="cfs:documentation-1591"
+    elementFormDefault="qualified"
+    xmlns="cfs:documentation-1591"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="Topic">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded" >
+        <xs:element name="TypeDocumentation" type="TypeDocumentation" />
+      </xs:choice>
+      <xs:attribute name="DocID" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DocumentationTopicTree" >
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded" >
+        <xs:element name="TypeDocumentation" />
+        <xs:element name="ExternalDocumentation" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="TypeDocumentation" >
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="Annotation" />
+      <xs:element name="Declaration" />
+      <xs:element name="Property" />
+      <xs:element name="Method" />
+      <xs:element name="Event" />
+      <xs:element name="Attribute" />
+      <xs:element name="TopicLink" type="TopicLink" />
+    </xs:choice>
+    <xs:attribute name="Name" >
+      <xs:annotation>
+        <xs:documentation>The title of the topic.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Key" use="required" />
+    <xs:attribute name="Kind" />
+  </xs:complexType>
+  <xs:complexType name="ExternalDocumentation" >
+    <xs:sequence >
+      <xs:element name="Body" />
+    </xs:sequence>
+    <xs:attribute name="Name" >
+      <xs:annotation>
+        <xs:documentation>The title of the topic.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Key" use="required" />
+  </xs:complexType>
+  <xs:complexType name="TopicLink" >
+    <xs:sequence />
+    <xs:attribute name="Name" use="required" >
+      <xs:annotation>
+        <xs:documentation>The content of the link.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="RefKey" />
+    <xs:attribute name="Kind" />
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SuctionConfiguration"
+    targetNamespace="cfs:suction-1589"
+    elementFormDefault="qualified"
+    xmlns="cfs:suction-1589"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="Suction" type="SuctionType" />
+  <xs:complexType name="SuctionType">
+    <xs:choice maxOccurs="unbounded" >
+      <xs:element name="SourceDirectory" type="SourceDirectoryType" />
+      <xs:element name="Source" type="SourceType" />
+      <xs:element name="ResourceExtensions" />
+      <xs:element name="Include" />
+      <xs:element name="Goal" >
+        <xs:annotation>
+          <xs:documentation>
+            Specifies one or more types to be extracted. Can contain simple or qualified names.
+            The names can contain wildcards.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string" >
+              <xs:attribute name="Label" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="EntryPoint" />
+      <xs:element name="Output" >
+        <xs:complexType>
+          <xs:attribute name="Directory" type="xs:string" />
+          <xs:attribute name="Name" type="xs:string" />
+          <xs:attribute name="Kind" type="OutputKind" />
+          <xs:attribute name="Version" type="xs:string" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Define" />
+      <xs:element name="Emit" type="EmitType" />
+      <xs:element name="Assembly" >
+        <xs:complexType>
+          <xs:attribute name="Name" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReferencePath" >
+        <xs:complexType>
+          <xs:attribute name="Path" />
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="SourceDirectoryType" >
+    <xs:annotation>
+      <xs:documentation>
+        Container for directory, specifies the base source path for included elements.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="Source" type="SourceType" />
+      <xs:element name="SourceDirectory" type="SourceDirectoryType" />
+    </xs:choice>
+    <xs:attribute name="Directory" use="optional" >
+      <xs:annotation>
+        <xs:documentation>
+          If not specified, the context directory is used.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="SourceType" >
+    <xs:annotation>
+      <xs:documentation>
+        Describes a set of source path to include into the suction. The sources may
+        be directories or files and the path may be absolute or relative.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string" >
+        <xs:attribute name="Filter" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="EmitType">
+    <xs:annotation>
+      <xs:documentation>
+        Specifies how the suction results should be converted into outputs.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Type" type="EmitKindType" >
+      <xs:annotation>
+        <xs:documentation>
+          Specifies the kind of emitter to use.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Destination" >
+      <xs:annotation>
+        <xs:documentation>
+          Specifies the destination of emit results, relative to the OutputDirectory.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:simpleType name="EmitKindType" >
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="assembly" />
+      <xs:enumeration value="project-original" />
+      <xs:enumeration value="project-copy" />
+      <xs:enumeration value="documentation" />
+      <xs:enumeration value="typescript" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OutputKind" >
+    <xs:annotation>
+      <xs:documentation>
+        Microsoft.CodeAnalysis.OutputKind
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ConsoleApplication" />
+      <xs:enumeration value="WindowsApplication" />
+      <xs:enumeration value="DynamicallyLinkedLibrary" />
+      <xs:enumeration value="exe" />
+      <xs:enumeration value="dll" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
