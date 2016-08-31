@@ -7,7 +7,7 @@ namespace CSharpSuction.Results
     {
         protected override void AppendLine()
         {
-            Log.Debug(">> {0}", Text);
+            Log.Debug("{0}", Text);
             Clear();
         }
 
@@ -30,7 +30,8 @@ namespace CSharpSuction.Results
         {
             if (argument is UnresolvedDocumentationReferenceResult)
             {
-                return true;
+                // return true;
+                return ((UnresolvedDocumentationReferenceResult)argument).Message.Severity <= LogSeverity.debug;
             }
             else if (argument is UnprocessedFileWarning)
             {

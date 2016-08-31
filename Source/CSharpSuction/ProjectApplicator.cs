@@ -1,8 +1,9 @@
 ﻿using Common;
 using CSharpSuction.Configuration;
-using CSharpSuction.Documentation;
 using CSharpSuction.Exceptions;
-using CSharpSuction.Generation;
+using CSharpSuction.Generators.Documentation;
+using CSharpSuction.Generators.Executable;
+using CSharpSuction.Generators.Project;
 using CSharpSuction.Input;
 using Microsoft.CodeAnalysis;
 using System;
@@ -20,7 +21,7 @@ namespace CSharpSuction
         /// Applies the project settings to the suction context.
         /// </summary>
         /// <param name="suction"></param>
-        public IList<INameInfo> ApplyProject(Suction suction, SuctionProject project)
+        public IList<INameInfo> ApplyProject(Suction suction, ProjectDescriptor project)
         {
             foreach (var rp in project.ReferencePath)
             {

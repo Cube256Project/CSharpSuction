@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="cfs:relative:docid" content="CSharpSuction.SuctionTopic" />
+    <title>C# Suction Utility</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>C# Suction Utility</h1>
+
+    <p>
+        The <b>suction</b> program extracts source code for a given type-set 
+        from a source tree containing C# code and additional resource files. It uses the 
+        powerful <a href="zz">Microsoft.CodeAnalysis</a> package which provides abstract syntax tree (AST) 
+        and symbol information on the code to produce a vareity of outputs types, called <b>emits</b>,
+        like compiled assemblies, project files or documentation.
+    </p>
+
+    <section>
+        <h1>Features</h1>
+        <ul>
+            <li>Extraction and reorganization of C# projects based on namespaces</li>
+            <li>Output assembly or project and solution files</li>
+            <li>Package sources for GIT publishing</li>
+            <li>Support for NuGet packages</li>
+            <li>Documentation generation based on Roslyn AST</li>
+            <li>Convert C# to TypeScript</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>Using Suction</h1>
+
+        <section>
+            <h1>Command Line</h1>
+            <p>
+                To extract a set of types, and their dependencies from a source tree in the working directory,
+                just specifiy the type names as goals:
+            </p>
+            <code>suction -g Class1 Class2</code>
+            <p>
+                The names don't need to be qualified; wildcards '*' and '?' can be used.
+            </p>
+            <p>
+                For more elaborate construction, creating a suction-file may be useful:
+            </p>
+            <xmp><Suction xmlns="cfs:suction-1589">
+    <SourceDirectory Directory="Source">
+        <Source Filter="*.cs">Component1</Source>
+        <Source Filter="*.cs *.html">Component2</Source>
+    </SourceDirectory>
+    <Goal>
+        Class1 Class2
+    </Goal>
+    <Output Name="suction" Kind="ConsoleApplication" Version="1.2.3.4" />
+    <Emit Destination="doc" Type="documentation" EntryPage="Index" ProductName="Some Product" />
+</Suction></xmp>
+        </section>
+    </section>
+
+    <section>
+        <h1>Programming Suction</h1>
+        <p>
+            Core functionality is provided by the <a>Suction</a> class; it may be addressed directly or by 
+            means of the <a>CSharpSuction.Program</a>, which provides a command line interface together
+            with a configuration file format, given by the <a>ProjectDescriptor</a> class.
+        </p>
+    </section>
+</body>
+</html>

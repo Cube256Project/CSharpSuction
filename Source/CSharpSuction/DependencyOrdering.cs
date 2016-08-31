@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Common;
+using CSharpSuction.Generators.Documentation.Topics;
 
 namespace CSharpSuction
 {
@@ -23,6 +24,7 @@ namespace CSharpSuction
         }
 
         private Dictionary<string, Entry> _names = new Dictionary<string, Entry>();
+        private HashSet<string> _excludednamespaces = new HashSet<string>();
 
         #endregion
 
@@ -31,6 +33,11 @@ namespace CSharpSuction
         private Entry Current { get; set; }
 
         private SemanticModel Model { get; set; }
+
+        public DependencyOrdering()
+        {
+            _excludednamespaces.Add("System");
+        }
 
         public IEnumerable<ITypeInfo> Order(Suction suction, IEnumerable<ITypeInfo> types)
         {
@@ -100,6 +107,7 @@ namespace CSharpSuction
                     Model = Suction.Compilation.GetSemanticModel(node.SyntaxTree, false);
 
                     RegisterDeclarationDependencies(node);
+                    RegisterInvocationDependencies(node);
                 }
             }
             finally
@@ -132,13 +140,53 @@ namespace CSharpSuction
 
                         if (!fullname.StartsWith("System"))
                         {
-
-                            //Log.Debug("{0} -> {1}", Current.Type.QualifiedName, fullname);
+                            Log.Debug("declaration dependency {0} -> {1}", Current.Type.QualifiedName, fullname);
 
                             Current.DependOn.Add(fullname);
                         }
                     }
                 }
+            }
+        }
+
+        private void RegisterInvocationDependencies(SyntaxNode container)
+        {
+            foreach (var node in container.DescendantNodes())
+            {
+                ITypeSymbol ts = null;
+                /*if (node is IdentifierNameSyntax)
+                {
+                    ts = Model.GetSymbolInfo(node).Symbol.GetTypeSymbol();
+                }
+                else */
+                if (node is ObjectCreationExpressionSyntax)
+                {
+                    var oc = (ObjectCreationExpressionSyntax)node;
+                    ts = Model.GetSymbolInfo(oc.Type).Symbol as ITypeSymbol;
+                }
+
+                if (ts is IArrayTypeSymbol)
+                {
+                    ts = ((IArrayTypeSymbol)ts).ElementType;
+                }
+
+                if (ts is INamedTypeSymbol)
+                {
+                    var tref = TopicReference.Parse(ts.GetFullName());
+                    var fullname = tref.ToString();
+
+                    if (
+                        fullname != Current.Key && 
+                        !Current.DependOn.Contains(fullname) &&
+                        !_excludednamespaces.Any(n => tref.Namespaces.Any(q => n == q)))
+                    {
+                        if (Current.DependOn.Add(fullname))
+                        {
+                            Log.Debug("invocation dependency {0} -> {1}", Current.Type.QualifiedName, fullname);
+                        }
+                    }
+                }
+
             }
         }
     }

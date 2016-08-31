@@ -37,12 +37,12 @@ namespace CSharpSuction.Input
 
             var rx = new Regex("^" + pname + @"(?<version>\.([\w\d\.\-])+)" + @"/lib/(net45|dotnet|portable\-net45\+win8)/" + Location + ".*$");
 
-            Log.Debug("search assembly {0} expression [{1}] ...", PackageName.Quote(), rx);
+            // Log.Debug("search assembly {0} expression [{1}] ...", PackageName.Quote(), rx);
 
             string result = null;
             foreach (var ca in RecursePath(folder, rx))
             {
-                Log.Debug("  {0}", ca);
+                // Log.Debug("  {0}", ca);
 
                 result = ca;
             }
@@ -57,6 +57,8 @@ namespace CSharpSuction.Input
             Version = match.Groups["version"].Value.Substring(1);
 
             HintPath = result;
+
+            Log.Information("using nuget package {0}.{1}.", PackageName, Version);
 
             return Path.Combine(folder, result);
         }

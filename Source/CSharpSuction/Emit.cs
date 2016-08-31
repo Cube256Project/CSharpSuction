@@ -6,10 +6,10 @@ using System.Linq;
 namespace CSharpSuction
 {
     /// <summary>
-    /// Emits a suction.
+    /// Emits the compilation associated with a suction.
     /// </summary>
     /// <remarks>
-    /// <para>Emit implementations derive from this class.</para>
+    /// <para>Emit implementations derive from this class and override the <see cref="Generate"/> method.</para>
     /// </remarks>
     public abstract class Emit
     {
@@ -90,11 +90,23 @@ namespace CSharpSuction
 
         protected Suction Suction { get; private set; }
 
+        public IReadOnlyDictionary<string, string> Parameters { get; set; }
+
         #endregion
 
         #region Events
 
         public event SuctionEventHandler OnMessage;
+
+        #endregion
+
+        #region Construction
+
+        protected Emit()
+        {
+            // initially empty
+            Parameters = new Dictionary<string, string>();
+        }
 
         #endregion
 

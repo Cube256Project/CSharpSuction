@@ -211,5 +211,11 @@ namespace CSharpSuction
 
             return result;
         }
+
+        public static IEnumerable<SyntaxNode> Nodes(this ITypeInfo typeinfo)
+        {
+            return ((TypeInfo)typeinfo).Nodes;
+        }
+
     }
 }

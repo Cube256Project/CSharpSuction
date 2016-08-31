@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CSharpSuction.Configuration
 {
@@ -12,6 +13,8 @@ namespace CSharpSuction.Configuration
         public string Destination;
 
         public Type EmitterType;
+
+        public Dictionary<string, string> Parameters = new Dictionary<string, string>();
 
         public EmitInstruction()
         { }

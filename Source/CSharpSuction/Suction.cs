@@ -22,6 +22,18 @@ namespace CSharpSuction
     /// <summary>
     /// Extracts sources from a collection of C# source files using Roslyn.
     /// </summary>
+    /// <remarks>
+    /// <para>After a suction object was created, the <see cref="AddSourceDirectory(string, Regex)"/> method
+    /// is used to add input sources. Suction will parse and extract type names from the sources to build
+    /// a name table. Once all sources are in, the <see cref="LookupName(string)"/> method can be used
+    /// to identify the desired types, called GOALs. The list of all GOALs is then passed to the 
+    /// <see cref="Expand(IEnumerable{INameInfo})"/> method, which adds them to the compilation.</para>
+    /// <para>
+    /// At any time the current state of the compilation can be emitted using a <see cref="Emit"/> object.
+    /// </para>
+    /// <para>
+    /// The <see cref="Compilation"/> property provides access to the underlying Roslyn context.</para>
+    /// </remarks>
     public class Suction
     {
         #region Private
