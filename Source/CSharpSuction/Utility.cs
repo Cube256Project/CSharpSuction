@@ -234,7 +234,7 @@ namespace CSharpSuction
 
         private void PrintSyntax()
         {
-            Trace("syntax: suction [ -vspo ] <project-file> [ -g { goal } ]\n");
+            Trace("syntax: suction [ -vspo ] <project-file> [ -g {{ goal }} ]\n");
             Trace("  -v verbose output.");
             Trace("  -s print summary.");
             Trace("  -g specify goals.");
